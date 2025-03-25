@@ -4,18 +4,24 @@ public class CommissionCalculator {
 
     // ฟังก์ชันคำนวณอัตราค่านายหน้าเบี้ยประกันปีแรก
     public static double getCommissionRate(int policyAge, int customerAge) {
-        if (policyAge == 1) {
-            if (customerAge >= 18 && customerAge <= 30) {
-                return 2.0;
-            } else if (customerAge > 30 && customerAge <= 50) {
-                return 1.5;
-            } else if (customerAge > 50) {
-                return 1.0;
-            }
-        } else if (policyAge == 2) {
-            return 1.0;
+        if (customerAge < 0 || customerAge > 60) {
+            return 0.0; // ไม่มีค่านายหน้าสำหรับอายุนอกช่วง 0-60
         }
-        return 0.5; // ค่าเริ่มต้นหากไม่ตรงเงื่อนไข
+
+        switch (policyAge) {
+            case 1:
+                return 2.0; // ทุกช่วงอายุ 0-60 ได้ 2%
+            case 2:
+                if (customerAge <= 50) {
+                    return 1.0; // อายุ 0-50 ได้ 1%
+                } else {
+                    return 2.0; // อายุ 51-60 ได้ 2%
+                }
+            case 3:
+                return 1.0; // ทุกช่วงอายุ 0-60 ได้ 1%
+            default:
+                return 0.0;
+        }
     }
 
     // ฟังก์ชันคำนวณอัตราค่าจัดงานต่อเบี้ยประกันภัย
