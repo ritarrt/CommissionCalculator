@@ -54,12 +54,6 @@ public class CommissionCalculator {
             System.out.print("กรุณากรอกอายุของผู้เอาประกัน: ");
             int customerAge = scanner.nextInt();
 
-            // ตรวจสอบอายุผู้เอาประกัน
-            if (customerAge < 18) {
-                System.out.println("อายุผู้เอาประกันต้องไม่น้อยกว่า 18 ปี");
-                continue;
-            }
-
             // สำหรับการคำนวณประเภทกรมธรรม์
             double commissionRate = getCommissionRate(policyAge, customerAge);
             double overridingRate = 0.0;
